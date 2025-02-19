@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <!-- Basic -->
   <meta charset="utf-8" />
@@ -12,7 +11,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Energym</title>
+  <title>AIGYMm</title>
 
   <!-- slider stylesheet -->
   <link rel="stylesheet" type="text/css"
@@ -28,6 +27,17 @@
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "P4rIPHGxNsi7D9SmP",
+      });
+   })();
+</script>
 </head>
 
 <body class="sub_page">
@@ -39,7 +49,7 @@
           <a class="navbar-brand" href="index.html">
             <img src="images/logo.png" alt="" />
             <span>
-              Energym
+              AIGYM
             </span>
           </a>
           <div class="contact_nav" id="">
@@ -53,24 +63,23 @@
               <li class="nav-item">
                 <a class="nav-link" href="service.html">
                   <img src="images/call.png" alt="" />
-                  <span>Call : + 01 1234567890</span>
+                  <span>Call :0917854876</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="service.html">
                   <img src="images/envelope.png" alt="" />
-                  <span>demo@gmail.com</span>
+                  <span>aigym@gmail.com</span>
                 </a>
               </li>
             </ul>
           </div>
         </nav>
       </div>
-
     </header>
     <!-- end header section -->
     <!-- slider section -->
-    <section class=" slider_section position-relative">
+    <section class="slider_section position-relative">
       <div class="container">
         <div class="custom_nav2">
           <nav class="navbar navbar-expand-lg custom_nav-container ">
@@ -86,20 +95,13 @@
                     <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="about.html">About </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="service.html">Services </a>
+                    <a class="nav-link" href="service.html">Exercise </a>
                   </li>
                   <li class="nav-item active">
                     <a class="nav-link" href="contact.html">Contact Us</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                  </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
-                  <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
                 </form>
               </div>
             </div>
@@ -123,26 +125,24 @@
       <div class="layout_padding2-top">
         <div class="row">
           <div class="col-md-6 ">
-            <form action="">
-              <div class="contact_form-container">
+            <form id="contactForm" class="contact_form-container">
+              <div>
                 <div>
-                  <div>
-                    <input type="text" placeholder="Name" />
-                  </div>
-                  <div>
-                    <input type="email" placeholder="Email" />
-                  </div>
-                  <div>
-                    <input type="text" placeholder="Phone Number" />
-                  </div>
-                  <div class="mt-5">
-                    <input type="text" placeholder="Message" />
-                  </div>
-                  <div class="mt-5">
-                    <button type="submit">
-                      Send
-                    </button>
-                  </div>
+                  <input type="text" id="name" placeholder="Name" required />
+                </div>
+                <div>
+                  <input type="email" id="email" placeholder="Email" required />
+                </div>
+                <div>
+                  <input type="text" id="phone" placeholder="Phone Number" required />
+                </div>
+                <div class="mt-5">
+                  <input type="text" id="message" placeholder="Message" required />
+                </div>
+                <div class="mt-5">
+                  <button type="submit">
+                    Send
+                  </button>
                 </div>
               </div>
             </form>
@@ -151,9 +151,9 @@
             <div class="map_container">
               <div class="map-responsive">
                 <iframe
-                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Eiffel+Tower+Paris+France"
-                  width="600" height="300" frameborder="0" style="border:0; width: 100%; height:100%"
-                  allowfullscreen></iframe>
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.571861624879!2d121.01243577492316!3d14.566458885915846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c9080e6f2abd%3A0x1d5b9be15aad02!2sMap%C3%BAa%20University%20Makati!5e0!3m2!1sen!2sph!4v1739983845761!5m2!1sen!2sph"
+                  width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
               </div>
             </div>
           </div>
@@ -163,34 +163,26 @@
   </section>
   <!-- end contact section -->
 
-
   <!-- info section -->
-
   <section class="info_section layout_padding2-top">
     <div class="container">
       <div class="info_form">
         <h4>
-          Our Newsletter
+          Let Us Help You!
         </h4>
-        <form action="">
-          <input type="text" placeholder="Enter your email">
-          <div class="d-flex justify-content-end">
-            <button>
-              subscribe
-            </button>
-          </div>
-        </form>
+        
       </div>
     </div>
     <div class="container">
       <div class="row">
         <div class="col-md-3">
           <h6>
-            About Energym
+            About AIGYM
           </h6>
           <p>
-            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-            minim veniam, quis nostrud exercitation u
+            AI Gym is an innovative fitness website that combines artificial intelligence with personalized workout routines.
+            It provides smart training plans and AI-driven recommendations to help users achieve
+            their fitness goals efficiently.
           </p>
         </div>
         <div class="col-md-2 offset-md-1">
@@ -202,16 +194,10 @@
               <a class="" href="index.html">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="">
-              <a class="" href="about.html">About </a>
+              <a class="" href="service.html">Exercise</a>
             </li>
             <li class="">
-              <a class="" href="service.html">Services </a>
-            </li>
-            <li class="">
-              <a class="" href="#contactSection">Contact Us</a>
-            </li>
-            <li class="">
-              <a class="" href="#">Login</a>
+              <a class="" href="contact.html">Contact Us</a>
             </li>
           </ul>
         </div>
@@ -221,28 +207,14 @@
           </h6>
           <ul>
             <li>
-              <a href="">
-                Adipiscing
+              <a
+                href="https://www.yelp.com/search?cflt=gyms&find_loc=Makati%2C+Metro+Manila&msockid=0fa4050e2e506b0018ce16302f906a43">
+                Best Gym in Makati
               </a>
             </li>
             <li>
-              <a href="">
-                Elit, sed
-              </a>
-            </li>
-            <li>
-              <a href="">
-                do Eiusmod
-              </a>
-            </li>
-            <li>
-              <a href="">
-                Tempor
-              </a>
-            </li>
-            <li>
-              <a href="">
-                incididunt
+              <a href="https://www.healthline.com/health/muscle-recovery">
+                Recovery
               </a>
             </li>
           </ul>
@@ -254,35 +226,35 @@
           <div class="info_link-box">
             <a href="">
               <img src="images/location-white.png" alt="">
-              <span> No.123, loram ipusm</span>
+              <span> Mapua Makati</span>
             </a>
-            <a href="">
+            <a href="https://www.google.com/search?client=opera-gx&q=google&sourceid=opera&ie=UTF-8&oe=UTF-8">
               <img src="images/call-white.png" alt="">
-              <span>+01 12345678901</span>
+              <span>09178549876</span>
             </a>
-            <a href="">
+            <a href="https://www.google.com/search?client=opera-gx&q=google&sourceid=opera&ie=UTF-8&oe=UTF-8">
               <img src="images/mail-white.png" alt="">
-              <span> demo123@gmail.com</span>
+              <span> aigymm@gmail.com</span>
             </a>
           </div>
           <div class="info_social">
             <div>
-              <a href="">
+              <a href="https://www.facebook.com/">
                 <img src="images/facebook-logo-button.png" alt="">
               </a>
             </div>
             <div>
-              <a href="">
+              <a href="https://x.com/i/flow/login?redirect_after_login=%2Fhome">
                 <img src="images/twitter-logo-button.png" alt="">
               </a>
             </div>
             <div>
-              <a href="">
+              <a href="https://www.linkedin.com/">
                 <img src="images/linkedin.png" alt="">
               </a>
             </div>
             <div>
-              <a href="">
+              <a href="https://www.instagram.com/">
                 <img src="images/instagram.png" alt="">
               </a>
             </div>
@@ -291,9 +263,7 @@
       </div>
     </div>
   </section>
-
   <!-- end info section -->
-
 
   <!-- footer section -->
   <section class="container-fluid footer_section ">
@@ -314,7 +284,34 @@
         .querySelector(".custom_menu-btn")
         .classList.toggle("menu_btn-style");
     }
+
+    // Initialize EmailJS
+    (function () {
+      emailjs.init("P4rIPHGxNsi7D9SmP"); // Replace with your actual public key
+    })();
+
+    // Handle form submission
+    document.getElementById('contactForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      // Get form data
+      const templateParams = {
+        from_name: document.getElementById('name').value,
+        from_email: document.getElementById('email').value,
+        phone_number: document.getElementById('phone').value,
+        message: document.getElementById('message').value
+      };
+
+      // Send email using EmailJS
+      emailjs.send('service_056rr1s', 'template_uaud1zt', templateParams)
+        .then(function (response) {
+          alert('Message sent successfully!');
+          event.target.reset(); // Clear the form
+        }, function (error) {
+          alert('Failed to send message. Please try again.');
+          console.error('EmailJS error:', error);
+        });
+    });
   </script>
 </body>
-
 </html>
