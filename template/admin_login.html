@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIGYM - Admin Login</title>
+    
+    <!-- Bootstrap & Custom Styles -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        
+        .login-container {
+            max-width: 450px;
+            margin: 100px auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-logo img {
+            height: 60px;
+            margin-bottom: 15px;
+        }
+        
+        .login-logo span {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .login-form input {
+            width: 100%;
+            margin-bottom: 20px;
+            height: 50px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .login-form input:focus {
+            border-color: #f8702a;
+            box-shadow: 0 0 10px rgba(248, 112, 42, 0.2);
+            outline: none;
+        }
+        
+        .login-form button {
+            width: 100%;
+            padding: 15px;
+            background-color: #f8702a;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .login-form button:hover {
+            background-color: #e65e1c;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(248, 112, 42, 0.3);
+        }
+        
+        .alert {
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="login-logo">
+                <img src="images/logo.png" alt="AIGYM Logo">
+                <span>AIGYM Admin</span>
+            </div>
+            
+            <div id="loginAlert" class="alert alert-danger" role="alert">
+                Invalid username or password!
+            </div>
+            
+            <form id="loginForm" class="login-form">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Set the default admin account
+            const adminAccount = {
+                username: "admin",
+                password: "123"
+            };
+            
+            // Check if admin account exists in localStorage
+            let adminExists = false;
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+            
+            for (const user of users) {
+                if (user.email === "admin@aigym.com") {
+                    adminExists = true;
+                    break;
+                }
+            }
+            
+            // If admin doesn't exist, create it
+            if (!adminExists) {
+                const adminUser = {
+                    id: Date.now(),
+                    firstName: "Admin",
+                    lastName: "User",
+                    email: "admin@aigym.com",
+                    password: btoa("123"),
+                    gender: "Male",
+                    age: "30",
+                    isAdmin: true
+                };
+                
+                users.push(adminUser);
+                localStorage.setItem("users", JSON.stringify(users));
+            }
+            
+            // Handle login form submission
+            document.getElementById("loginForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+                
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+                
+                if (username === adminAccount.username && password === adminAccount.password) {
+                    localStorage.setItem("adminLoggedIn", "true");
+                    window.location.href = "admin.html";
+                } else {
+                    document.getElementById("loginAlert").style.display = "block";
+                    setTimeout(() => {
+                        document.getElementById("loginAlert").style.display = "none";
+                    }, 3000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
