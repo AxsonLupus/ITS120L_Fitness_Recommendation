@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIGYM - User Management</title>
+    
+    <!-- Bootstrap & Custom Styles -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    
+    <style>
+        .users-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .users-form-container input, select {
+            width: 100%;
+            margin-bottom: 15px;
+            height: 45px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        .users-form-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #f8702a;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .users-form-container button:hover {
+            background-color: transparent;
+            color: #f8702a;
+            border: 1px solid #f8702a;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f9fa;
+        }
+
+        .edit-btn, .delete-btn {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .edit-btn {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .delete-btn:hover {
+            background-color: #b21f2d;
+        }
+
+        .logout-btn {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            color: #f8702a;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .logout-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="sub_page">
+
+    <div class="hero_area">
+        <header class="header_section">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg custom_nav-container">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="images/logo.png" alt="">
+                        <span>AIGYM - User Management</span>
+                    </a>
+                    <a href="login.html" class="logout-btn">Logout</a>
+                </nav>
+            </div>
+        </header>
+    </div>
+
+    <section class="layout_padding">
+        <div class="container">
+            <div class="heading_container">
+                <h2>User Management</h2>
+            </div>
+            
+            <div class="users-container">
+                <!-- Add User Form -->
+                <h3>Add New User</h3>
+                <form id="userForm" class="users-form-container">
+                    <input type="text" id="firstName" placeholder="First Name" required>
+                    <input type="text" id="lastName" placeholder="Last Name" required>
+                    <input type="email" id="email" placeholder="Email" required>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <select id="gender" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    <input type="number" id="age" placeholder="Age" required>
+                    <button type="submit">Add User</button>
+                </form>
+
+                <!-- User List Table -->
+                <h3>Registered Users</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Gender</th>
+                            <th>Age</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody">
+                        <!-- Users will be displayed here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", loadUsers);
+
+        // Register User
+        document.getElementById("userForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let firstName = document.getElementById("firstName").value;
+            let lastName = document.getElementById("lastName").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let gender = document.getElementById("gender").value;
+            let age = document.getElementById("age").value;
+
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            // Check for duplicate email
+            if (users.some(user => user.email === email)) {
+                alert("Email already exists!");
+                return;
+            }
+
+            let newUser = {
+                id: Date.now(),
+                firstName,
+                lastName,
+                email,
+                password: btoa(password),
+                gender,
+                age
+            };
+
+            users.push(newUser);
+            localStorage.setItem("users", JSON.stringify(users));
+
+            loadUsers();
+            alert("User Added Successfully!");
+
+            document.getElementById("userForm").reset();
+        });
+
+        // Load Users into Table
+        function loadUsers() {
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            let tableBody = document.getElementById("userTableBody");
+            tableBody.innerHTML = "";
+
+            users.forEach(user => {
+                let row = `<tr>
+                    <td>${user.id}</td>
+                    <td>${user.firstName} ${user.lastName}</td>
+                    <td>${user.email}</td>
+                    <td>${user.gender}</td>
+                    <td>${user.age}</td>
+                    <td>
+                        <button class="edit-btn" onclick="editUser(${user.id})">Edit</button>
+                        <button class="delete-btn" onclick="deleteUser(${user.id})">Delete</button>
+                    </td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        // Edit User
+        function editUser(userId) {
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            let user = users.find(user => user.id === userId);
+
+            if (!user) return;
+
+            let newFirstName = prompt("Enter new First Name", user.firstName);
+            let newLastName = prompt("Enter new Last Name", user.lastName);
+            let newAge = prompt("Enter new Age", user.age);
+
+            if (newFirstName && newLastName && newAge) {
+                user.firstName = newFirstName;
+                user.lastName = newLastName;
+                user.age = newAge;
+
+                localStorage.setItem("users", JSON.stringify(users));
+                loadUsers();
+                alert("User updated successfully!");
+            }
+        }
+
+        // Delete User
+        function deleteUser(userId) {
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            if (confirm("Are you sure you want to delete this user?")) {
+                users = users.filter(user => user.id !== userId);
+                localStorage.setItem("users", JSON.stringify(users));
+                loadUsers();
+                alert("User deleted successfully!");
+            }
+        }
+    </script>
+
+</body>
+</html>
